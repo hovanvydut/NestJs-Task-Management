@@ -2,10 +2,14 @@ import axios from 'axios';
 import * as config from './../config';
 
 export default class BaseHttpService {
-  BASE_URL = config.SERVER_HOST;
+  BASE_URL =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : config.SERVER_HOST;
   _accessToken = null;
 
   constructor(routerStore) {
+    console.log(this.BASE_URL);
     this.routerStore = routerStore;
   }
 
